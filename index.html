@@ -545,13 +545,19 @@
             .filter-controls {
                 width: 100%;
                 gap: 0.8rem;
-            }
-
-            .filter-buttons {
-                width: 100%;
                 overflow-x: auto;
                 overflow-y: hidden;
                 padding-bottom: 0.5rem;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+                flex-direction: row;
+            }
+
+            .filter-buttons {
+                width: auto;
+                overflow-x: visible;
+                overflow-y: hidden;
+                padding-bottom: 0;
                 scroll-behavior: smooth;
                 -webkit-overflow-scrolling: touch;
             }
@@ -563,7 +569,8 @@
             }
 
             .sort-select {
-                width: 100%;
+                white-space: nowrap;
+                flex-shrink: 0;
             }
 
             .filter-btn {
