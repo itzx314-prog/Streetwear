@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - STREETWEAR CO.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #0a0a0a;
+            background: #fafafa;
+        }
+
+        /* Navigation */
+        nav {
+            background: #0a0a0a;
+            color: white;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #ff6b35;
+        }
+
+        .cart-badge, .wishlist-badge {
+            background: #ff6b35;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-left: 0.4rem;
+            font-weight: 700;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 3rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        /* Cart Layout */
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        /* Cart Items */
+        .cart-items {
+            background: white;
+            border: 1px solid #e5e5e5;
+            padding: 2rem;
+            border-radius: 20px;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #999;
+        }
+
+        .empty-cart h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .continue-shopping {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 1rem 2rem;
+            background: #0a0a0a;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: background 0.2s;
+        }
+
+        .continue-shopping:hover {
+            background: #6366f1;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 120px 1fr auto;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            background: #f5f5f5;
+        }
+
+        .item-details h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .item-category {
+            color: #999;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .qty-btn {
+            width: 35px;
+            height: 35px;
+            border: 2px solid #0a0a0a;
+            background: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: #0a0a0a;
+            color: white;
+        }
+
+        .quantity {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .remove-btn {
+            color: #ff6b35;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        .remove-btn:hover {
+            text-decoration: underline;
+        }
+
+        .item-actions {
+            text-align: right;
+        }
+
+        .item-total {
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: white;
+            border: 1px solid #e5e5e5;
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+            border-radius: 20px;
+        }
+
+        .order-summary h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .summary-line.total {
+            border-bottom: none;
+            font-size: 1.3rem;
+            font-weight: 900;
+            padding-top: 1.5rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 0.2s;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: relative;
+                top: 0;
+            }
+
+            .cart-item {
+                grid-template-columns: 100px 1fr;
+            }
+
+            .item-actions {
+                grid-column: 2;
+                text-align: left;
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            nav h1 {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" style="text-decoration: none; color: white;">
+            <h1>STREETWEAR</h1>
+        </a>
+        <ul>
+            <li><a href="index.html">SHOP</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="wishlist.html">WISHLIST <span class="wishlist-badge" id="wishlist-count">0</span></a></li>
+            <li><a href="cart.html" class="active">CART <span class="cart-badge" id="cart-count">0</span></a></li>
+        </ul>
+    </nav>
+
+    <!-- Cart Container -->
+    <div class="container">
+        <h2>Your Cart</h2>
+        
+        <div class="cart-layout">
+            <!-- Cart Items -->
+            <div class="cart-items" id="cart-items">
+                <div class="empty-cart">
+                    <h3>YOUR CART IS EMPTY</h3>
+                    <p>Add some fresh pieces to get started</p>
+                    <a href="index.html" class="continue-shopping">CONTINUE SHOPPING</a>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-line">
+                    <span>Subtotal</span>
+                    <span id="subtotal">$0.00</span>
+                </div>
+                <div class="summary-line">
+                    <span>Shipping</span>
+                    <span id="shipping">$0.00</span>
+                </div>
+                <div class="summary-line">
+                    <span>Tax</span>
+                    <span id="tax">$0.00</span>
+                </div>
+                <div class="summary-line total">
+                    <span>Total</span>
+                    <span id="total">$0.00</span>
+                </div>
+                <button class="checkout-btn" onclick="window.location.href='checkout.html'">PROCEED TO CHECKOUT</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Update cart count
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            document.getElementById('wishlist-count').textContent = wishlist.length;
+        }
+
+        // Display cart items
+        function displayCart() {
+            const cartContainer = document.getElementById('cart-items');
+            
+            if (cart.length === 0) {
+                cartContainer.innerHTML = `
+                    <div class="empty-cart">
+                        <h3>YOUR CART IS EMPTY</h3>
+                        <p>Add some fresh pieces to get started</p>
+                        <a href="index.html" class="continue-shopping">CONTINUE SHOPPING</a>
+                    </div>
+                `;
+                updateSummary();
+                return;
+            }
+
+            cartContainer.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <img src="${item.images[0]}" alt="${item.name}" class="item-image">
+                    <div class="item-details">
+                        <div class="item-category">${item.category}</div>
+                        <h3>${item.name}</h3>
+                        <div class="item-price">£${item.price.toFixed(2)}</div>
+                        <div class="quantity-controls">
+                            <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                            <span class="quantity">${item.quantity}</span>
+                            <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                        </div>
+                        <div class="remove-btn" onclick="removeItem(${index})">Remove</div>
+                    </div>
+                    <div class="item-actions">
+                        <div class="item-total">£${(item.price * item.quantity).toFixed(2)}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            updateSummary();
+        }
+
+        // Update quantity
+        function updateQuantity(index, change) {
+            cart[index].quantity += change;
+            
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+            updateCartCount();
+        }
+
+        // Remove item
+        function removeItem(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+            updateCartCount();
+        }
+
+        // Update order summary
+        function updateSummary() {
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const shipping = subtotal > 0 ? 10 : 0;
+            const tax = subtotal * 0.08;
+            const total = subtotal + shipping + tax;
+
+            document.getElementById('subtotal').textContent = `£${subtotal.toFixed(2)}`;
+            document.getElementById('shipping').textContent = shipping > 0 ? `£${shipping.toFixed(2)}` : 'FREE';
+            document.getElementById('tax').textContent = `£${tax.toFixed(2)}`;
+            document.getElementById('total').textContent = `£${total.toFixed(2)}`;
+        }
+
+        // Initialize
+        displayCart();
+        updateCartCount();
+    </script>
+</body>
+</html>

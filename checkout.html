@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - STREETWEAR CO.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #0a0a0a;
+            background: #fafafa;
+        }
+
+        /* Navigation */
+        nav {
+            background: #0a0a0a;
+            color: white;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #ff6b35;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 3rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        /* Checkout Layout */
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 3rem;
+        }
+
+        /* Checkout Form */
+        .checkout-form {
+            background: white;
+            border: 1px solid #e5e5e5;
+            padding: 2.5rem;
+            border-radius: 20px;
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-section h3 {
+            font-size: 1.3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid #e5e5e5;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: white;
+            border: 1px solid #e5e5e5;
+            padding: 2.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+            border-radius: 20px;
+        }
+
+        .order-summary h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .order-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .order-item:first-child {
+            padding-top: 0;
+        }
+
+        .order-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            background: #f5f5f5;
+        }
+
+        .order-item-details {
+            flex: 1;
+        }
+
+        .order-item-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+        }
+
+        .order-item-qty {
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+        }
+
+        .order-item-price {
+            font-weight: 700;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .summary-line.total {
+            border-bottom: none;
+            font-size: 1.3rem;
+            font-weight: 900;
+            padding-top: 1.5rem;
+        }
+
+        .place-order-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 0.2s;
+        }
+
+        .place-order-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: relative;
+                top: 0;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            nav h1 {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .checkout-form {
+                padding: 1.5rem;
+            }
+
+            .order-summary {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" style="text-decoration: none; color: white;">
+            <h1>STREETWEAR</h1>
+        </a>
+        <ul>
+            <li><a href="index.html">SHOP</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="wishlist.html">WISHLIST</a></li>
+            <li><a href="cart.html">CART</a></li>
+        </ul>
+    </nav>
+
+    <!-- Checkout Container -->
+    <div class="container">
+        <h2>Checkout</h2>
+        
+        <div class="checkout-layout">
+            <!-- Checkout Form -->
+            <div class="checkout-form">
+                <form id="checkout-form">
+                    <!-- Shipping Information -->
+                    <div class="form-section">
+                        <h3>Shipping Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" id="last-name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Street Address</label>
+                            <input type="text" id="address" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input type="text" id="state" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="zip">ZIP Code</label>
+                                <input type="text" id="zip" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <select id="country" required>
+                                    <option value="">Select Country</option>
+                                    <option value="US">United States</option>
+                                    <option value="UK">United Kingdom</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="AU">Australia</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Information -->
+                    <div class="form-section">
+                        <h3>Payment Information</h3>
+                        <div class="form-group">
+                            <label for="card-name">Name on Card</label>
+                            <input type="text" id="card-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-number">Card Number</label>
+                            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry">Expiry Date</label>
+                                <input type="text" id="expiry" placeholder="MM/YY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" placeholder="123" required>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <div id="order-items"></div>
+                <div class="summary-line">
+                    <span>Subtotal</span>
+                    <span id="subtotal">£0.00</span>
+                </div>
+                <div class="summary-line">
+                    <span>Shipping</span>
+                    <span id="shipping">£10.00</span>
+                </div>
+                <div class="summary-line">
+                    <span>Tax</span>
+                    <span id="tax">£0.00</span>
+                </div>
+                <div class="summary-line total">
+                    <span>Total</span>
+                    <span id="total">£0.00</span>
+                </div>
+                <button class="place-order-btn" onclick="placeOrder()">PLACE ORDER</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Display order items
+        function displayOrderItems() {
+            const container = document.getElementById('order-items');
+            
+            if (cart.length === 0) {
+                window.location.href = 'cart.html';
+                return;
+            }
+
+            container.innerHTML = cart.map(item => `
+                <div class="order-item">
+                    <img src="${item.images[0]}" alt="${item.name}" class="order-item-image">
+                    <div class="order-item-details">
+                        <div class="order-item-name">${item.name}</div>
+                        <div class="order-item-qty">Qty: ${item.quantity}</div>
+                    </div>
+                    <div class="order-item-price">£${(item.price * item.quantity).toFixed(2)}</div>
+                </div>
+            `).join('');
+
+            updateSummary();
+        }
+
+        // Update order summary
+        function updateSummary() {
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const shipping = 10;
+            const tax = subtotal * 0.08;
+            const total = subtotal + shipping + tax;
+
+            document.getElementById('subtotal').textContent = `£${subtotal.toFixed(2)}`;
+            document.getElementById('tax').textContent = `£${tax.toFixed(2)}`;
+            document.getElementById('total').textContent = `£${total.toFixed(2)}`;
+        }
+
+        // Place order
+        function placeOrder() {
+            const form = document.getElementById('checkout-form');
+            
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Generate order number
+            const orderNumber = 'ORD' + Date.now();
+            
+            // Store order in localStorage
+            const order = {
+                orderNumber: orderNumber,
+                items: cart,
+                total: document.getElementById('total').textContent,
+                date: new Date().toISOString()
+            };
+            
+            localStorage.setItem('lastOrder', JSON.stringify(order));
+            
+            // Clear cart
+            localStorage.setItem('cart', JSON.stringify([]));
+            
+            // Redirect to confirmation
+            window.location.href = 'confirmation.html';
+        }
+
+        // Initialize
+        displayOrderItems();
+    </script>
+</body>
+</html>
