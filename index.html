@@ -551,32 +551,28 @@
                 scroll-behavior: smooth;
                 -webkit-overflow-scrolling: touch;
                 flex-direction: row;
+                display: flex;
             }
 
             .filter-buttons {
                 flex-shrink: 0;
                 gap: 0.8rem;
+                display: flex;
+                overflow: visible;
             }
 
             .filter-btn {
                 padding: 0.6rem 1.2rem;
                 font-size: 0.75rem;
-                white-space: nowrap;
-            }
-
-            .sort-select {
                 white-space: nowrap;
                 flex-shrink: 0;
-            }
-
-            .filter-btn {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.75rem;
             }
 
             .sort-select {
                 padding: 0.6rem 1rem;
                 font-size: 0.75rem;
+                white-space: nowrap;
+                flex-shrink: 0;
             }
 
             .container {
@@ -916,5 +912,3 @@
     </script>
 </body>
 </html>
-
-
