@@ -25,12 +25,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            gap: 2rem;
         }
 
         nav h1 {
             font-size: 1.6rem;
             font-weight: 900;
             letter-spacing: 2px;
+            white-space: nowrap;
         }
 
         nav ul {
@@ -38,6 +43,7 @@
             list-style: none;
             gap: 3rem;
             align-items: center;
+            margin-left: auto;
         }
 
         nav a {
@@ -60,6 +66,33 @@
             font-size: 0.75rem;
             margin-left: 0.4rem;
             font-weight: 700;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 0.4rem;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
         }
 
         .container {
@@ -108,6 +141,11 @@
             object-fit: cover;
             border-radius: 15px;
             background: #f5f5f5;
+            cursor: pointer;
+        }
+
+        .main-image:hover {
+            opacity: 0.9;
         }
 
         .wishlist-btn {
@@ -263,14 +301,6 @@
             border-radius: 50px;
             font-weight: 700;
             z-index: 1001;
-        }
-
-        .main-image {
-            cursor: pointer;
-        }
-
-        .main-image:hover {
-            opacity: 0.9;
         }
 
         .product-info-section h1 {
@@ -484,15 +514,30 @@
         @media (max-width: 768px) {
             nav {
                 padding: 1rem 1.5rem;
+                flex-wrap: wrap;
             }
 
             nav h1 {
                 font-size: 1.2rem;
             }
 
+            .hamburger {
+                display: flex;
+            }
+
             nav ul {
                 gap: 1.5rem;
                 font-size: 0.85rem;
+                order: 3;
+                width: 100%;
+                flex-direction: column;
+                margin-left: 0;
+                margin-top: 0.5rem;
+                display: none;
+            }
+
+            nav ul.active {
+                display: flex;
             }
 
             .container {
@@ -511,6 +556,45 @@
                 font-size: 2rem;
             }
         }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem;
+            }
+
+            nav h1 {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+                margin: 1.5rem auto;
+            }
+
+            .product-layout {
+                padding: 1.5rem;
+            }
+
+            .main-image {
+                height: 300px;
+            }
+
+            .thumbnail-gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .thumbnail {
+                height: 70px;
+            }
+
+            .product-info-section h1 {
+                font-size: 1.5rem;
+            }
+
+            .product-price {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -518,7 +602,12 @@
         <a href="index.html" style="text-decoration: none; color: white;">
             <h1>STREETWEAR</h1>
         </a>
-        <ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
             <li><a href="index.html">SHOP</a></li>
             <li><a href="about.html">ABOUT</a></li>
             <li><a href="wishlist.html">WISHLIST <span class="wishlist-badge" id="wishlist-count">0</span></a></li>
@@ -775,6 +864,23 @@
             updateCounts();
             alert(`${product.name} (${selectedSize}) added to cart!`);
         }
+
+        // Hamburger menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
 
         loadProduct();
         updateCounts();
