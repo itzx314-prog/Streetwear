@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="STREETWEAR CO.">
+    <meta name="description" content="Discover the latest in streetwear fashion at STREETWEAR CO. Explore our exclusive collection of trendy apparel and accessories">
+    <meta name="image" content="https://example.com/streetwear-co.jpg"><!--this is a placeholder url-->
+    <meta name="url" content="https://example.com/index.html"><!--this is a placeholder url-->
+    <meta name="type" content="website">
+    <meta name="locale" content="en_UK">
+    <title>Streetwear Co.</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <nav>
+        <a href="../Index Page/index.html" class="nav-logo">
+            <img src="../Streetwear Graffiti logo.svg" alt="Streetwear Co. Logo" class="logo">
+        </a>
+        <input type="text" class="nav-search-box" id="search-input" placeholder="SEARCH...">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
+            <li><a href="../Index Page/index.html">SHOP</a></li>
+            <li><a href="../About Page/about.html">ABOUT</a></li>
+            <li><a href="../Wishlist Page/wishlist.html">WISHLIST <span class="wishlist-badge" id="wishlist-count">0</span></a></li>
+            <li><a href="../Cart Page/cart.html" id="cart-link">CART <span class="cart-badge" id="cart-count">0</span></a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h2>Fresh Drops</h2>
+        <p>ELEVATE YOUR STREETWEAR GAME</p>
+    </section>
+
+    <section class="filter-section">
+        <div class="filter-controls">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-category="all">ALL</button>
+                <button class="filter-btn" data-category="men">MEN</button>
+                <button class="filter-btn" data-category="women">WOMEN</button>
+                <button class="filter-btn" data-category="kids">KIDS</button>
+                <button class="filter-btn" data-category="accessories">ACCESSORIES</button>
+            </div>
+            <select class="sort-select" id="sort-select">
+                <option value="default">SORT BY</option>
+                <option value="price-low">PRICE: LOW TO HIGH</option>
+                <option value="price-high">PRICE: HIGH TO LOW</option>
+                <option value="name-asc">NAME: A-Z</option>
+                <option value="name-desc">NAME: Z-A</option>
+            </select>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="products-grid" id="products-container">
+            <div class="loading">LOADING PRODUCTS...</div>
+        </div>
+
+        <div class="recently-viewed" id="recently-viewed-section" style="display: none;">
+            <h3>Recently Viewed</h3>
+            <div class="products-grid" id="recently-viewed-container"></div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

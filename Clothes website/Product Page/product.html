@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - STREETWEAR CO.</title>
+    <link rel="stylesheet" href="product.css">
+</head>
+<body>
+    <nav>
+        <a href="../Index Page/index.html" style="text-decoration: none; color: white;">
+            <h1>STREETWEAR</h1>
+        </a>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
+            <li><a href="../Index Page/index.html">SHOP</a></li>
+            <li><a href="../About Page/about.html">ABOUT</a></li>
+            <li><a href="../Wishlist Page/wishlist.html">WISHLIST <span class="wishlist-badge" id="wishlist-count">0</span></a></li>
+            <li><a href="../Cart Page/cart.html" id="cart-link">CART <span class="cart-badge" id="cart-count">0</span></a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <a href="../Index Page/index.html" class="back-btn">← BACK TO SHOP</a>
+        
+        <div class="breadcrumb" id="breadcrumb">
+            <a href="../Index Page/index.html">Home</a> / <span id="category-crumb"></span> / <span id="product-crumb"></span>
+        </div>
+
+        <div id="product-content">
+            <div class="loading">LOADING PRODUCT...</div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightbox">
+        <div class="lightbox-content">
+            <img src="" alt="Product image" class="lightbox-image" id="lightbox-image">
+            <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+            <button class="lightbox-prev" onclick="prevImage()">❮</button>
+            <button class="lightbox-next" onclick="nextImage()">❯</button>
+            <div class="lightbox-counter">
+                <span id="lightbox-counter-text">1 / 4</span>
+            </div>
+        </div>
+    </div>
+    <script src="product.js"></script>
+</body>
+</html>

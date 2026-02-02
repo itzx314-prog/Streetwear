@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed - STREETWEAR CO.</title>
+    <link rel="stylesheet" href="confirmation.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="../Index Page/index.html" style="text-decoration: none; color: white;">
+            <h1>STREETWEAR</h1>
+        </a>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
+            <li><a href="../Index Page/index.html">SHOP</a></li>
+            <li><a href="../About Page/about.html">ABOUT</a></li>
+            <li><a href="../Wishlist Page/wishlist.html">WISHLIST <span class="wishlist-badge" id="wishlist-count">0</span></a></li>
+            <li><a href="../Cart Page/cart.html" id="cart-link">CART <span class="cart-badge" id="cart-count">0</span></a></li>
+        </ul>
+    </nav>
+
+    <!-- Confirmation Container -->
+    <div class="container">
+        <div class="confirmation-box">
+            <div class="success-icon">✓</div>
+            <h1>Order Confirmed!</h1>
+            <div class="order-number">
+                Order Number: <strong id="order-number">Loading...</strong>
+            </div>
+            <div class="message">
+                Thank you for your order! We've sent a confirmation email with your order details. 
+                Your streetwear will be on its way soon.
+            </div>
+
+            <!-- Order Details -->
+            <div class="order-details">
+                <h3>Order Details</h3>
+                <div id="order-items"></div>
+                <div class="order-total">
+                    <span>Total Paid</span>
+                    <span id="order-total">£0.00</span>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <a href="../Index Page/index.html" class="btn btn-primary">Continue Shopping</a>
+                <button onclick="window.print()" class="btn btn-secondary">Print Receipt</button>
+            </div>
+        </div>
+    </div>
+    <script src="confirmation.js"></script>
+</body>
+</html>
